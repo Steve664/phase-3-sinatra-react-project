@@ -1,5 +1,8 @@
 class ApplicationController < Sinatra::Base
   set :default_content_type, 'application/json'
+  get '/' do
+    'Choo Choo! Welcome to your Sinatra server 🚅'
+  end
   # GET all users
   get '/users' do
     User.all.to_json(only: [:id, :name, :image_url])
