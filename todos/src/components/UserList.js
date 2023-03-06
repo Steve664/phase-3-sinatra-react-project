@@ -16,7 +16,7 @@ function UserList() {
   }, []);
 
   const handleDeleteUser = (userId) => {
-    axios.delete(`${url}${userId}`)
+    axios.delete(`${url}/users/${userId}`)
       .then(() => {
         setUsers(users.filter((user) => user.id !== userId));
       })
@@ -112,3 +112,4 @@ function UserList() {
 }
 
 export default UserList;
+
