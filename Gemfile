@@ -44,14 +44,10 @@ gem "faker", "~> 3.1.1"
 group :development do
   gem "pry", "~> 0.14.1"
 # Provides functionality to interact with a SQLite3 database
-  gem "sqlite3", "~> 1.4"
+  #gem "sqlite3", "~> 1.4"
   # Automatically reload when there are changes
   # https://github.com/alexch/rerun
   gem "rerun"
-end
-group :production do
- gem 'pg', '~> 1.4', '>= 1.4.6'
- gem 'puma', '~> 6.1', '>= 6.1.1'
 end
 # These gems will only be used when we are running tests
 group :test do
@@ -62,6 +58,6 @@ group :test do
 end
 
 group :production do
-  gem 'pg', '~> 1.4', '>= 1.4.6'
+  gem 'pg'
   gem 'puma', '~> 6.1', '>= 6.1.1'
 end

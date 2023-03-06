@@ -1,5 +1,7 @@
 {
   "dependencies": {
+    "@railway/cli": "^3.0.5",
+    "railway": "^2.0.17",
     "semantic-ui-css": "^2.5.0"
   }
 }
