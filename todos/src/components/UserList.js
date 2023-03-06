@@ -8,15 +8,15 @@ function UserList() {
   const [modalOpen, setModalOpen] = useState(false);
   const [name, setName] = useState('');
   const [image_url, setImageUrl] = useState('');
-
+  const url = 'https://phase-3-sinatra-react-project-production-dd92.up.railway.app/'
   useEffect(() => {
-    fetch('http://localhost:4000/users')
+    fetch(`${url}users`)
       .then((response) => response.json())
       .then((data) => setUsers(data));
   }, []);
 
   const handleDeleteUser = (userId) => {
-    axios.delete(`http://localhost:4000/users/${userId}`)
+    axios.delete(`${url}${userId}`)
       .then(() => {
         setUsers(users.filter((user) => user.id !== userId));
       })
@@ -34,7 +34,7 @@ function UserList() {
   const handleSubmit = (event) => {
     event.preventDefault();
     axios
-      .post('http://localhost:4000/users', {
+      .post(`${url}users`, {
         name: name,
         image_url: image_url,
       })
