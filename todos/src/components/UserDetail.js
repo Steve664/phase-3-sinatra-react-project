@@ -13,15 +13,16 @@ const UserDetail = () => {
   const [addModalOpen, setAddModalOpen] = useState(false);
   const [editingTodo, setEditingTodo] = useState({});
   const { id } = useParams()
+  const url = 'https://phase-3-sinatra-react-project-production-dd92.up.railway.app/'
   const userId = parseInt(id);
 
 
   useEffect(() => {
     // Get user and their todos from the API
-    axios.get(`http://localhost:4000/users/${id}`)
+    axios.get(`${url}users/${id}`)
       .then(res => {
         setUser(res.data);
-        return axios.get(`http://localhost:4000/todos/user/${id}`);
+        return axios.get(`${url}todos/user/${id}`);
       })
       .then(res => {
         setTodos(res.data);
@@ -33,7 +34,7 @@ const UserDetail = () => {
 
   const handleDelete = (todoId) => {
     // Delete the todo from the API
-    axios.delete(`http://localhost:4000/todos/${todoId}`)
+    axios.delete(`${url}todos/${todoId}`)
       .then(res => {
         console.log(res.data.message);
         // Update the todos state to remove the deleted todo
@@ -59,7 +60,7 @@ const UserDetail = () => {
   const handleEditTodoSubmit = (e) => {
     e.preventDefault();
     // Update the todo in the API
-    axios.put(`http://localhost:4000/todos/${editingTodo.id}`, editingTodo)
+    axios.put(`${url}todos/${editingTodo.id}`, editingTodo)
       .then(res => {
         console.log(res.data.message);
         // Update the todos state to reflect the changes
@@ -89,7 +90,7 @@ const UserDetail = () => {
       priority: priority
     };
 
-    axios.post(`http://localhost:4000/todos`, todoNew)
+    axios.post(`${url}todos`, todoNew)
       .then(res => {
         console.log(res.data.message);
         setTodos([...todos, res.data]);
