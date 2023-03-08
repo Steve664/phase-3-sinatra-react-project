@@ -9,6 +9,8 @@ function UserList() {
   const [name, setName] = useState('');
   const [image_url, setImageUrl] = useState('');
   const url = 'https://phase-3-sinatra-react-project-production-dd92.up.railway.app/'
+  const url2 = 'https://phase-3-sinatra-react-project-production-dd92.up.railway.app'
+
   useEffect(() => {
     fetch(`${url}users`)
       .then((response) => response.json())
@@ -71,7 +73,7 @@ function UserList() {
             <Table.Row key={user.id}>
               <Table.Cell>{user.name}</Table.Cell>
               <Table.Cell>
-                <Image src={user.image_url} size="tiny" rounded />
+                <Image src={`${url2}${user.image_url}`} size="tiny" rounded />
               </Table.Cell>
               <Table.Cell>
                 <Link to={`/users/details/${user.id}`}>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import EditTodoModal from './EditTodoModal';
 import 'semantic-ui-css/semantic.min.css';
-import { Card, Button, Header, Icon } from 'semantic-ui-react';
+import { Card, Button, Header, Icon, Image } from 'semantic-ui-react';
 import { useParams } from 'react-router-dom';
 import TodoForm from './TodoForm';
 
