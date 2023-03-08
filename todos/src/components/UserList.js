@@ -30,22 +30,28 @@ function UserList() {
   const handleModalClose = () => {
     setModalOpen(false);
   };
-
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('image', image_url);
+
     axios
-      .post(`${url}users`, {
-        name: name,
-        image_url: image_url,
+      .post(`${url}users`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
       })
       .then((response) => {
         setUsers([...users, response.data]);
         setName('');
-        setImageUrl('');
+        setImageUrl(null);
         handleModalClose();
       })
       .catch((error) => console.error(error));
   };
+
 
   return (
     <>
@@ -82,31 +88,34 @@ function UserList() {
           ))}
         </Table.Body>
       </Table>
-
       <Modal open={modalOpen} onClose={handleModalClose}>
         <Modal.Header>Add User</Modal.Header>
         <Modal.Content>
           <Form onSubmit={handleSubmit}>
             <Form.Field>
-              <label>Name</label>
+              <label htmlFor="name-input">Name</label>
               <input
+                id="name-input"
                 placeholder="User name"
                 value={name}
                 onChange={(event) => setName(event.target.value)}
               />
             </Form.Field>
             <Form.Field>
-              <label>Profile Image</label>
+              <label htmlFor="image-input">Select a profile image:</label>
               <input
-                placeholder="Image URL"
-                value={image_url}
-                onChange={(event) => setImageUrl(event.target.value)}
+                id="image-input"
+                type="file"
+                onChange={(event) => setImageUrl(event.target.files[0])}
               />
             </Form.Field>
-            <Button type="submit">Add</Button>
+            <Button type="submit" disabled={!name || !image_url}>
+              Add
+            </Button>
           </Form>
         </Modal.Content>
       </Modal>
+
     </>
   );
 }

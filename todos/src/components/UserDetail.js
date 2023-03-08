@@ -14,6 +14,7 @@ const UserDetail = () => {
   const [editingTodo, setEditingTodo] = useState({});
   const { id } = useParams()
   const url = 'https://phase-3-sinatra-react-project-production-dd92.up.railway.app/'
+  const url2 = 'https://phase-3-sinatra-react-project-production-dd92.up.railway.app'
   const userId = parseInt(id);
 
 
@@ -105,7 +106,11 @@ const UserDetail = () => {
   return (
     <div>
       <Header as='h2' icon textAlign='center'>
-        <Icon name='user' circular size='large' />
+        <Image
+          size="Large"
+          avatar
+          src={`${url2}${user.image_url}`}
+        />
         <Header.Content>{user.name}</Header.Content>
       </Header>
       <center>  <Button icon labelPosition='left' style={{ margin: "15px" }} onClick={handleAddModalOpen}> <Icon name='plus' /> Add Todo </Button></center>

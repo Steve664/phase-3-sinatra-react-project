@@ -17,11 +17,18 @@ class ApplicationController < Sinatra::Base
     end
   end
   # CREATE a new user
-  post '/users' do
-    user_data = JSON.parse(request.body.read)
-    new_user = User.create(name: user_data['name'], image_url: user_data['image_url'])
-    status 201
-    new_user.to_json(only: [:id, :name, :image_url])
+ post '/users' do
+    if params[:name] && params[:image]
+      image_file = params[:image][:tempfile]
+      filename = SecureRandom.hex + File.extname(params[:image][:filename])
+      filepath = File.join('public/images', filename)
+      File.open(filepath, 'wb') { |file| file.write(image_file.read) }
+      new_user = User.create(name: params[:name], image_url: "/images/#{filename}")
+      new_user.to_json
+    else
+      status 400
+      { error: 'Name and image are required' }.to_json
+    end
   end
   # UPDATE an existing user by ID
   patch '/users/:id' do |id|
